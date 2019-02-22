@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.in.mapper.ChildMapper">
+
+<!-- 데이터 작성 시  -->
+<insert id ="create">
+	insert into child (Nno,kinder,school)
+	values(#{Nno},#{kinder},#{school})
+</insert>
+  
+<select id="count" resultType = "int">
+ 	select count(Cno) from child
+
+</select> 
+  
+  <!-- 국가 분별 없이 전부  -->
+ <!-- 게시물 읽기(Read)  tbl_board에서 bno (글번호) 를 기준으로 DB컬럼을 READ	한다-->
+ <select id = "kinderAvg" resultType ="int"><!-- 데이터를 받아오기 위한 resultType 명시 -->
+ 	select avg(kinder) from child
+ </select> 
+
+ <select id = "schoolAvg" resultType ="int">
+ 	select avg(school) from child
+ </select> 
+ 
+ <!-- 국가코드에 따른 품목 평균치 -->
+ <select id = "nKinderAvg" resultType="int">
+ 	select avg(kinder) from child where Nno=#{Nno}
+ </select>
+
+<select id = "nSchoolAvg" resultType="int">
+ 	select avg(school) from child where Nno=#{Nno}
+ </select>
+
+<!-- 최대 최소  -->
+<select id="kinderMax" resultType = "int">
+	select max(kinder) from child;
+</select>
+
+<select id="schoolMax" resultType = "int">
+	select max(school) from child;
+</select>
+
+<select id="kinderMin" resultType = "int">
+	select min(kinder) from child;
+</select>
+<select id="schoolMin" resultType = "int">
+	select min(school) from child;
+</select>
+
+<select id="nKinderMax" resultType= "int">
+	select Nno from child where kinder =( select max(kinder) from child) limit 1; 
+</select>
+
+<select id="nSchoolMax" resultType= "int">
+	select Nno from child where school =( select max(school) from child) limit 1; 
+</select>
+
+<select id="nKinderMin" resultType= "int">
+	select Nno from child where kinder =( select min(kinder) from child) limit 1; 
+</select>
+
+<select id="nSchoolMin" resultType= "int">
+	select Nno from child where school =( select min(school) from child) limit 1; 
+</select>
+
+
+
+
+
+ </mapper>

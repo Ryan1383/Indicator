@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.in.mapper.LivingMapper">
+
+<!-- 데이터 작성 시  -->
+<insert id ="create">
+	insert into living (Nno,cityOne, cityTwo, subOne, subTwo)
+	values(#{Nno},#{cityOne},#{cityTwo}, #{subOne}, #{subTwo})
+</insert>
+  
+  
+  <!-- 국가 분별 없이 전부  -->
+ <!-- 게시물 읽기(Read)  tbl_board에서 bno (글번호) 를 기준으로 DB컬럼을 READ	한다-->
+ <select id = "cityOneAvg" resultType ="int"><!-- 데이터를 받아오기 위한 resultType 명시 -->
+ 	select avg(cityOne) from living
+ </select> 
+
+ <select id = "cityTwoAvg" resultType ="int">
+ 	select avg(cityTwo) from living
+ </select> 
+ 
+  <select id = "subOneAvg" resultType ="int">
+ 	select avg(subOne) from living
+ </select> 
+ 
+ <select id="subTwoAvg" resultType ="int">
+ 	select avg(subTwo) from living
+ </select>
+ 
+ 
+ <!-- 국가코드에 따른 품목 평균치 -->
+ <select id = "nCityOneAvg" resultType="int">
+ 	select avg(cityOne) from living where Nno=#{Nno}
+ </select>
+
+<select id = "nCityTwoAvg" resultType="int">
+ 	select avg(cityTwo) from living where Nno=#{Nno}
+ </select>
+ 
+ <select id = "nSubOneAvg" resultType="int">
+ 	select avg(subOne) from living where Nno=#{Nno}
+ </select>
+
+ <select id = "nSubTwoAvg" resultType="int">
+ 	select avg(subTwo) from living where Nno=#{Nno}
+ </select>
+ 
+ <select id="count" resultType = "int">
+ 	select count(Lno) from living
+
+</select> 
+ 
+ 
+<!-- 최대 최소  -->
+<select id="cityOneMax" resultType = "int">
+	select max(cityOne) from living;
+</select>
+
+<select id="cityTwoMax" resultType = "int">
+	select max(cityTwo) from living;
+</select>
+
+<select id="subOneMax" resultType = "int">
+	select max(subOne) from living;
+</select>
+
+<select id="subTwoMax" resultType = "int">
+	select max(subTwo) from living;
+</select>
+
+
+
+<select id="cityOneMin" resultType = "int">
+	select min(cityOne) from living;
+</select>
+<select id="cityTwoMin" resultType = "int">
+	select min(cityTwo) from living;
+</select>
+
+<select id="subOneMin" resultType = "int">
+	select min(subOne) from living;
+</select>
+
+<select id="subTwoMin" resultType = "int">
+	select min(subTwo) from living;
+</select>
+
+
+
+<select id="nCityOneMax" resultType= "int">
+	select Nno from living where cityOne =( select max(cityOne) from living) limit 1; 
+</select>
+
+<select id="nCityTwoMax" resultType= "int">
+	select Nno from living where cityTwo =( select max(cityTwo) from living) limit 1; 
+</select>
+
+<select id="nSubOneMax" resultType= "int">
+	select Nno from living where subOne =( select max(subOne) from living) limit 1; 
+</select>
+
+<select id="nSubTwoMax" resultType= "int">
+	select Nno from living where subTwo =( select max(subTwo) from living) limit 1; 
+</select>
+
+
+
+<select id="nCityOneMin" resultType= "int">
+	select Nno from living where cityOne =( select min(cityOne) from living) limit 1; 
+</select>
+
+<select id="nCityTwoMin" resultType= "int">
+	select Nno from living where cityTwo =( select min(cityTwo) from living) limit 1; 
+</select>
+
+<select id="nSubOneMin" resultType= "int">
+	select Nno from living where subOne =( select min(subOne) from living) limit 1; 
+</select>
+
+<select id="nSubTwoMin" resultType= "int">
+	select Nno from living where subTwo =( select min(subTwo) from living) limit 1; 
+</select>
+
+
+
+
+ </mapper>

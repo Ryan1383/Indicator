@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.in.mapper.MealMapper">
+
+<!-- 데이터 작성 시  -->
+<insert id ="create">
+	insert into meal (Nno,onep, twop, mcmill)
+	values(#{Nno},#{onep},#{twop}, #{mcmill})
+</insert>
+  
+  <select id="count" resultType = "int">
+ 	select count(Mno) from meal;
+
+</select> 
+ 
+  
+  <!-- 국가 분별 없이 전부  -->
+ <select id = "oneAvg" resultType ="int"><!-- 데이터를 받아오기 위한 resultType 명시 -->
+ 	select avg(onep) from meal
+ </select> 
+
+ <select id = "twoAvg" resultType ="int">
+ 	select avg(twop) from meal
+ </select> 
+ 
+  <select id = "mcAvg" resultType ="int">
+ 	select avg(mcmill) from meal
+ </select> 
+ 
+ 
+ <!-- 국가코드에 따른 품목 평균치 -->
+ <select id = "nOneAvg" resultType="int">
+ 	select avg(onep) from meal where Nno=#{Nno}
+ </select>
+
+<select id = "nTwoAvg" resultType="int">
+ 	select avg(twop) from meal where Nno=#{Nno}
+ </select>
+ 
+ <select id = "nMcAvg" resultType="int">
+ 	select avg(mcmill) from meal where Nno=#{Nno}
+ </select>
+
+<!-- 최대 최소  -->
+<select id="oneMax" resultType = "int">
+	select max(onep) from meal;
+</select>
+
+<select id="twoMax" resultType = "int">
+	select max(twop) from meal;
+</select>
+
+<select id="mcMax" resultType = "int">
+	select max(mcmill) from meal;
+</select>
+
+<select id="oneMin" resultType = "int">
+	select min(onep) from meal;
+</select>
+<select id="twoMin" resultType = "int">
+	select min(twop) from meal;
+</select>
+<select id="mcMin" resultType = "int">
+	select min(mcmill) from meal;
+</select>
+
+<select id="nOneMax" resultType= "int">
+	select Nno from meal where onep =( select max(onep) from meal) limit 1; 
+</select>
+
+<select id="nTwoMax" resultType= "int">
+	select Nno from meal where twop =( select max(twop) from meal) limit 1; 
+</select>
+
+<select id="nMcmillMax" resultType= "int">
+	select Nno from meal where mcmill =( select max(mcmill) from meal) limit 1; 
+</select>
+
+<select id="nOneMin" resultType= "int">
+	select Nno from meal where onep =( select min(onep) from meal) limit 1; 
+</select>
+
+<select id="nTwoMin" resultType= "int">
+	select Nno from meal where twop =( select min(twop) from meal) limit 1; 
+</select>
+
+<select id="nMcMin" resultType= "int">
+	select Nno from meal where mcmill =( select min(mcmill) from meal) limit 1; 
+</select>
+
+
+
+
+ </mapper>

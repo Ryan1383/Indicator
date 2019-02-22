@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.in.mapper.MarketMapper">
+
+<!-- 데이터 작성 시  -->
+<insert id ="create">
+	insert into market (Nno, milk,rice, apple, water)
+	values(#{Nno},#{milk},#{rice}, #{apple},#{water})
+</insert>
+  
+  <select id="count" resultType = "int">
+ 	select count(Mmo) from market;
+
+</select> 
+ 
+  
+  <!-- 국가 분별 없이 전부  -->
+ <!-- 게시물 읽기(Read)  tbl_board에서 bno (글번호) 를 기준으로 DB컬럼을 READ	한다-->
+ <select id = "milkAvg" resultType ="int"><!-- 데이터를 받아오기 위한 resultType 명시 -->
+ 	select avg(milk) from market
+ </select> 
+
+ <select id = "riceAvg" resultType ="int">
+ 	select avg(rice) from market
+ </select> 
+ 
+  <select id = "appleAvg" resultType ="int">
+ 	select avg(apple) from market
+ </select> 
+ 
+  <select id = "waterAvg" resultType ="int">
+ 	select avg(water) from market
+ </select> 
+ 
+ 
+ <!-- 국가코드에 따른 품목 평균치 -->
+ <select id = "nMilkAvg" resultType="int">
+ 	select avg(milk) from market where Nno=#{Nno}
+ </select>
+
+<select id = "nRiceAvg" resultType="int">
+ 	select avg(rice) from market where Nno=#{Nno}
+ </select>
+ 
+ <select id = "nAppleAvg" resultType="int">
+ 	select avg(apple) from market where Nno=#{Nno}
+ </select>
+  <select id = "nWaterAvg" resultType="int">
+ 	select avg(water) from market where Nno=#{Nno}
+ </select>
+ 
+
+<!-- 최대 최소  -->
+<select id="milkMax" resultType = "int">
+	select max(milk) from market;
+</select>
+
+<select id="riceMax" resultType = "int">
+	select max(rice) from market;
+</select>
+
+<select id="appleMax" resultType = "int">
+	select max(apple) from market;
+</select>
+<select id="waterMax" resultType = "int">
+	select max(water) from market;
+</select>
+
+
+<select id="milkMin" resultType = "int">
+	select min(milk) from market;
+</select>
+<select id="riceMin" resultType = "int">
+	select min(rice) from market;
+</select>
+<select id="appleMin" resultType = "int">
+	select min(apple) from market;
+</select>
+<select id="waterMin" resultType = "int">
+	select min(water) from market;
+</select>
+
+<select id="nMilkMax" resultType= "int">
+	select Nno from market where milk =( select max(milk) from market) limit 1; 
+</select>
+
+<select id="nRiceMax" resultType= "int">
+	select Nno from market where rice =( select max(rice) from market) limit 1; 
+</select>
+
+<select id="nAppleMax" resultType= "int">
+	select Nno from market where apple =( select max(apple) from market) limit 1; 
+</select>
+<select id="nWaterMax" resultType= "int">
+	select Nno from market where water =( select max(water) from market) limit 1; 
+</select>
+
+<select id="nMilkMin" resultType= "int">
+	select Nno from market where milk =( select min(milk) from market) limit 1; 
+</select>
+
+<select id="nRiceMin" resultType= "int">
+	select Nno from market where rice =( select min(rice) from market) limit 1; 
+</select>
+
+<select id="nAppleMin" resultType= "int">
+	select Nno from market where apple =( select min(apple) from market) limit 1; 
+</select>
+<select id="nWaterMin" resultType= "int">
+	select Nno from market where water =( select min(water) from market) limit 1; 
+</select>
+
+
+
+
+ </mapper>
